@@ -1,5 +1,4 @@
 package com.loja.Loja_Adler.model;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,9 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.validacaoCPF.ValidarCPF;
 
 @Entity
 @Table(name = "funcionario")
@@ -25,13 +27,15 @@ public class Funcionario implements Serializable {
 	private Long id;
 
 	private String nome;
+	private String cpf;
 	private Double salarioBruto;
 	@Temporal(TemporalType.DATE)
 	private Date dataEntrada;
 	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
 	private String cargo;
-	private String cidade;
+	@ManyToOne
+	private Cidade cidade;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -53,6 +57,18 @@ public class Funcionario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		if (ValidarCPF.isCPF(cpf) == true)
+			System.out.printf("%s\n", ValidarCPF.imprimeCPF(cpf));
+		else
+			System.out.printf("Erro, CPF invalido !!!\n");
+		this.cpf = cpf;
 	}
 
 	public Double getSalarioBruto() {
@@ -87,11 +103,11 @@ public class Funcionario implements Serializable {
 		this.cargo = cargo;
 	}
 
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 
@@ -141,6 +157,10 @@ public class Funcionario implements Serializable {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

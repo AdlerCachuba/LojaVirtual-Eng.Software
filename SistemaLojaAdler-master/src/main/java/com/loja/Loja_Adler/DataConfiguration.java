@@ -18,8 +18,10 @@ public class DataConfiguration {
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/loja?useTimezone=true&serverTimezone=America/Sao_Paulo");
 		dataSource.setUsername("root");
-		dataSource.setPassword("");//salvar senha depois
+		dataSource.setPassword("root");
 		return dataSource;
+		
+
 	}
 	
 	@Bean
