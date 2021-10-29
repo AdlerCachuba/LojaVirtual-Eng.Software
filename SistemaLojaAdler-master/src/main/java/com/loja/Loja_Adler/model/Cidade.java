@@ -54,6 +54,6 @@ public class Cidade implements Serializable {
 	public String toString() {
 		return nome + "-"+estado.getSigla();
 	}
-	
-	
+
+
 }

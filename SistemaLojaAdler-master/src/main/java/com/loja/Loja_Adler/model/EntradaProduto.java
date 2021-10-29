@@ -2,6 +2,7 @@ package com.loja.Loja_Adler.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "entrada_produto")
 public class EntradaProduto implements Serializable {
-
-	public EntradaProduto() {
-		super();
-	}
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -59,8 +56,32 @@ public class EntradaProduto implements Serializable {
 	public void setFornecedor(String fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-	
-	
-	
 
+	public EntradaProduto() {
+		super();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		EntradaProduto that = (EntradaProduto) o;
+		return Objects.equals(id, that.id) && Objects.equals(funcionario, that.funcionario) && Objects.equals(dataEntrada, that.dataEntrada) && Objects.equals(observacao, that.observacao) && Objects.equals(fornecedor, that.fornecedor);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, funcionario, dataEntrada, observacao, fornecedor);
+	}
+
+	@Override
+	public String toString() {
+		return "EntradaProduto{" +
+				"id=" + id +
+				", funcionario=" + funcionario +
+				", dataEntrada=" + dataEntrada +
+				", observacao='" + observacao + '\'' +
+				", fornecedor='" + fornecedor + '\'' +
+				'}';
+	}
 }

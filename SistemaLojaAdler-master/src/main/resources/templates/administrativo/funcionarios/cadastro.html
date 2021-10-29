@@ -1,13 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
-
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{administrativo/fragments/layout}">
 <head>
-	<title>Página Cadastro de Funcionários</title>
+<title>Página Cadastro de Funcionário da loja virtual</title>
+
 </head>
-
 <body>
-
-
 	<section class="layout-content" layout:fragment="corpo">
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md navbar-top bg-light">
@@ -17,46 +15,38 @@
 							<span>Cadastrar Funcionários</span></li>
 					</ul>
 				</div>
-				<a class="btn btn-primary btn-md" href="/administrativo/funcionarios/listar" role="button"> <span
-						class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+				<a class="btn btn-primary btn-md"
+					href="/administrativo/funcionarios/listar" role="button"> <span
+					class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
 					<span>Listar Funcionários</span>
 				</a>
 			</nav>
 		</div>
 
 		<div class="container" id="cadastro">
-			<form action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">
+			<form onsubmit="return isValidCPF()" action="/administrativo/funcionarios/salvar"
+				th:object="${funcionario}" method="POST" data-toggle="validator" role="form">
 				<div class="form-row">
+
 					<div class="form-group col-md-6">
-						<label for="nome">Nome do Funcionário</label> <input type="text" class="form-control" id="nome"
-							placeholder="Nome Completo" autofocus="autofocus" th:field="*{nome}" value="" />
-						<div class="invalid-feedback"></div>
+						<label for="nome">Nome do Funcionário</label>
+						<input type="text" class="form-control" data-error="Por favor, informe um nome" required id="nome" placeholder="Nome Completo" autofocus="autofocus" th:field="*{nome}" value="" />
+						<div class="help-block with-errors"></div>
 					</div>
+
 					<div class="form-group col-md-6">
-						<label for="salario">Salário Bruto</label> <input type="text" class="form-control" id="salario"
-							data-mask-reverse="true" th:field="*{salarioBruto}" value="" />
-						<div class="invalid-feedback"></div>
+						<label for="cpf">CPF</label>
+						<input type="text" class="form-control cpf-mask"  onblur="if (this.value !== '') {isValidCPF()}"
+							   placeholder="Apenas números" data-mask="000.000.000-00" id="cpf" name="cpf" th:field="*{cpf}"
+							   data-minlength="14" maxlength="14" required />
+						<span class="font-weight-bold text-danger" role="alert" id="retornoFalse"></span>
+						<span class="font-weight-bold text-success" role="alert" id="retornoTrue"></span>
 					</div>
+
 				</div>
-				<!-- <div class="form-row">
-	                    <div class="form-group col-md-6">
-	                        <label for="dataEntrada">Data de Entrada</label>
-	                        <input type="date" class="form-control" id="dataEntrada" name="dataEntrada" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
-	                    <div class="form-group col-md-6">
-	                        <label for="dataSaida">Data de Sa�da</label>
-	                        <input type="date" class="form-control" id="dataSaida" name="dataSaida" value=""/>
-	                        <div class="invalid-feedback">
-	
-	                        </div>
-	                    </div>
-	                </div> -->
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="cargo">Cargo</label> <select id="cargo" class="form-control" name="cargo">
+						<label for="cargo">Cargo</label> <select id="cargo" class="form-control" name="cargo" th:field="*{cargo}">
 							<option value="">Selecione...</option>
 							<option value="1">Auxiliar Contábil</option>
 							<option value="2">Auxiliar Administrativo</option>
@@ -73,45 +63,66 @@
 						<div class="invalid-feedback"></div>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="salario">CPF</label> <input type="text" class="form-control" id="cpf"
-							data-mask="000.000.000-00" data-mask-reverse="false" th:field="*{cpf}" value="" />
+						<label for="salario">Salário Bruto</label> <input type="text"
+																		  class="form-control" id="salario" data-mask="#.###,00"
+																		  th:field="*{salarioBruto}" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
+
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="cidade">Cidade</label> <select th:field="*{cidade}" class="form-control">
-							<option th:each="cid: ${listaCidades}" th:value="${cid.id}" th:text="${cid.nome}"></option>
+						<label for="cidade">Cidade</label> <select th:field="*{cidade}"
+							class="form-control">
+							<option th:each="cid: ${listaCidades}" th:value="${cid.id}"
+								th:text="${cid.nome}"></option>
 						</select>
-						<div class="invalid-feedback"></div>
-					</div>
+					<div class="invalid-feedback"></div>
+                </div>
+
 					<div class="form-group col-md-6">
-						<label for="logradouro">Logradouro</label> <input type="text" class="form-control"
-							id="logradouro" placeholder="logradouro sem número" name="logradouro" value="" />
-						<div class="invalid-feedback"></div>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="numero">Número</label> <input type="number" class="form-control" id="numero"
-							name="numero" value="" />
-						<div class="invalid-feedback"></div>
-					</div>
-					<div class="form-group col-md-6">
-						<label for="complemento">Complemento</label> <input type="text" class="form-control"
-							id="complemento" placeholder="fundos, casa, AP. 102, .." name="complemento" value="" />
+						<label for="logradouro">Logradouro</label>
+						<input type="text" class="form-control" id="logradouro" placeholder="logradouro sem numero" name="logradouro" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="bairro">Bairro</label> <input type="text" class="form-control" id="bairro"
-							name="bairro" value="" />
+						<label for="numero">Número</label>
+						<input type="text" class="form-control" id="numero" name="numero" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="cep">Cep</label> <input type="text" class="form-control" id="cep"
-							data-mask="00000-000" name="cep" value="" />
+						<label for="complemento">Complemento</label> <input type="text"
+							class="form-control" id="complemento"
+							placeholder="Fundos, Casa, Apartamento..." name="complemento"
+							value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="bairro">Bairro</label>
+						<input type="text" class="form-control"  id="bairro" name="bairro" th:field="*{bairro}" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="cep">Cep</label>
+						<input type="text" class="form-control" id="cep" placeholder="Apenas números" data-mask="00000-000" maxlength="9" name="cep" th:field="*{cep}" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="email">Email</label>
+						<input type="text" class="form-control" id="email" name="email" autofocus="autofocus" th:field="*{email}" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="senha">Senha</label>
+						<input type="text" class="form-control" id="senha" name="senha" th:field="*{senha}" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
@@ -120,7 +131,36 @@
 			</form>
 		</div>
 	</section>
-
 </body>
-
 </html>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script>
+
+	function isValidCPF() {
+		let cpf = document.getElementById("cpf").value;
+		console.log(cpf)
+		if (typeof cpf !== "string") return false
+		cpf = cpf.replace(/[\s.-]*/igm, '')
+		if (cpf.length !== 11 || !Array.from(cpf).filter(e => e !== cpf[0]).length) {
+			document.getElementById("retornoFalse").innerHTML = "Cpf Inválido";
+			return false
+		}
+		var soma = 0
+		var resto
+		for (var i = 1; i <= 9; i++)
+			soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
+		resto = (soma * 10) % 11
+		if ((resto === 10) || (resto === 11))  resto = 0
+		if (resto !== parseInt(cpf.substring(9, 10)) ) return false
+		soma = 0
+		for (var i = 1; i <= 10; i++)
+			soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
+		resto = (soma * 10) % 11
+		if ((resto === 10) || (resto === 11))  resto = 0
+		if (resto !== parseInt(cpf.substring(10, 11) ) ) return false
+		document.getElementById("retornoFalse").innerHTML = "";
+		document.getElementById("retornoTrue").innerHTML = "Cpf Válido";
+		return true
+	}
+
+</script>

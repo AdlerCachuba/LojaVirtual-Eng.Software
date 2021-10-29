@@ -1,66 +1,112 @@
 package com.loja.Loja_Adler.controller;
 
+import com.loja.Loja_Adler.constants.ConstantsImagens;
+import com.loja.Loja_Adler.model.Produto;
+import com.loja.Loja_Adler.repository.CategoriaRepository;
+import com.loja.Loja_Adler.repository.MarcaRepository;
+import com.loja.Loja_Adler.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.loja.Loja_Adler.model.Produto;
-import com.loja.Loja_Adler.repository.CategoriaRepository;
-import com.loja.Loja_Adler.repository.ProdutoRepository;
-
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
-	
 @Controller
+@RequestMapping("/administrativo/produtos")
 public class ProdutoController {
-	
-	@Autowired
-	private ProdutoRepository produtoRepository;
-	
-	@Autowired
-	private CategoriaRepository categoriaRepositorio;
-	
-	@GetMapping("/administrativo/produtos/cadastrar")
-	public ModelAndView cadastrar(Produto produto) {
-		ModelAndView mv = new ModelAndView("administrativo/produtos/cadastro");
-		mv.addObject("produto", produto);
-		mv.addObject("listaCategorias", categoriaRepositorio.findAll());
-		return mv;  
-	}
-	
-	@GetMapping("/administrativo/produtos/listar")
-	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
-		mv.addObject("listaProdutos", produtoRepository.findAll());
-		return mv;
-	}
-	
-	@GetMapping("/administrativo/produtos/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Long id) {
-		Optional<Produto> produto = produtoRepository.findById(id);
-		return cadastrar(produto.get());
-	}
-	
-	@GetMapping("/administrativo/produtos/remover/{id}")
-	public ModelAndView remover(@PathVariable("id") Long id) {
-		Optional<Produto> produto = produtoRepository.findById(id);
-		produtoRepository.delete(produto.get());
-		return listar();
-	}
-	
-	@PostMapping("/administrativo/produtos/salvar")
-	public ModelAndView salvar(@Valid Produto produto, BindingResult result) {
-		if(result.hasErrors()) {
-			return cadastrar(produto);
-		}
-		produtoRepository.saveAndFlush(produto);
-		
-		return cadastrar(new Produto());
-	}
+
+    ConstantsImagens constantsImagens;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private MarcaRepository marcaRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @GetMapping("/cadastrar")
+    public ModelAndView cadastrar(Produto produto) {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/cadastro");
+        mv.addObject("produto", produto);
+        mv.addObject("listaMarcas", marcaRepository.findAll());
+        mv.addObject("listaCategorias", categoriaRepository.findAll());
+        return mv;
+    }
+
+    @GetMapping("/listar")
+    public ModelAndView listar() {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
+        mv.addObject("listaProdutos", produtoRepository.findAll());
+        return mv;
+    }
+
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Long id) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+        return cadastrar(produto.get());
+    }
+
+    @GetMapping("/remover/{id}")
+    public ModelAndView remover(@PathVariable("id") Long id) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+        produtoRepository.delete(produto.get());
+        return listar();
+    }
+
+    @ResponseBody
+    @GetMapping("/mostrarImagem/{imagem}")
+    public byte[] retornarImagem(@PathVariable("imagem") String imagem) {
+        if (imagem != null || imagem.trim().length() > 0) {
+            File imagemArquivo = new File(constantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
+            try {
+                return Files.readAllBytes(imagemArquivo.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+    @PostMapping("/salvar")
+    public ModelAndView salvar(@Validated Produto produto, BindingResult result, @RequestParam("file") MultipartFile arquivo) {
+
+        if (result.hasErrors()) {
+            return cadastrar(produto);
+        }
+        produtoRepository.saveAndFlush(produto);
+        try {
+
+            if (!arquivo.isEmpty()) {
+                byte[] bytes = arquivo.getBytes();
+
+                // Caminho onde a imagem vai ser salva
+                Path caminho = Paths.get(constantsImagens.CAMINHO_PASTA_IMAGENS + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
+                Files.write(caminho, bytes);
+
+                // Salva no banco de dados a imagem com tal nome
+                produto.setNomeImagem(String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
+
+                produtoRepository.saveAndFlush(produto);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return cadastrar(new Produto());
+    }
+
 }

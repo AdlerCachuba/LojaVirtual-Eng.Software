@@ -1,166 +1,217 @@
 package com.loja.Loja_Adler.model;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.validacaoCPF.ValidarCPF;
+import java.util.Objects;
 
 @Entity
 @Table(name = "funcionario")
 public class Funcionario implements Serializable {
 
-	public Funcionario() {
-		super();
-	}
+    public Funcionario() {
+        super();
+    }
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    private static final long serialVersionUID = 1L;
 
-	private String nome;
-	private String cpf;
-	private Double salarioBruto;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String nome;
+
+    private String cpf;
+
+    private Double salarioBruto;
+
+    private String logradouro;
+
+    private String numero;
+
+    private String complemento;
+
+    private String bairro;
+
+    private String uf;
+
+    private String cep;
+
+    private String email;
+
+    private String senha;
+
+	private String cargo;
+
 	@Temporal(TemporalType.DATE)
 	private Date dataEntrada;
+
 	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
-	private String cargo;
+
 	@ManyToOne
 	private Cidade cidade;
-	private String logradouro;
-	private String numero;
-	private String complemento;
-	private String bairro;
-	private String uf;
-	private String cep;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setCpf(String cpf) {
-		if (ValidarCPF.isCPF(cpf) == true)
-			System.out.printf("%s\n", ValidarCPF.imprimeCPF(cpf));
-		else
-			System.out.printf("Erro, CPF invalido !!!\n");
-		this.cpf = cpf;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public Double getSalarioBruto() {
-		return salarioBruto;
-	}
+    public Double getSalarioBruto() {
+        return salarioBruto;
+    }
 
-	public void setSalarioBruto(Double salarioBruto) {
-		this.salarioBruto = salarioBruto;
-	}
+    public void setSalarioBruto(Double salarioBruto) {
+        this.salarioBruto = salarioBruto;
+    }
 
-	public Date getDataEntrada() {
-		return dataEntrada;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public Date getDataSaida() {
-		return dataSaida;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setDataSaida(Date dataSaida) {
-		this.dataSaida = dataSaida;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public String getCargo() {
-		return cargo;
-	}
+    public String getComplemento() {
+        return complemento;
+    }
 
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
-	public Cidade getCidade() {
-		return cidade;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public String getLogradouro() {
-		return logradouro;
-	}
+    public String getUf() {
+        return uf;
+    }
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public String getUf() {
-		return uf;
-	}
+    public String getCargo() {
+        return cargo;
+    }
 
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public Date getDataEntrada() {
+        return dataEntrada;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public Date getDataSaida() {
+        return dataSaida;
+    }
 
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", salarioBruto=" + salarioBruto +
+                ", logradouro='" + logradouro + '\'' +
+                ", numero='" + numero + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", uf='" + uf + '\'' +
+                ", cep='" + cep + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", dataEntrada=" + dataEntrada +
+                ", dataSaida=" + dataSaida +
+                ", cidade=" + cidade +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Funcionario that = (Funcionario) o;
+        return Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(cpf, that.cpf) && Objects.equals(salarioBruto, that.salarioBruto) && Objects.equals(logradouro, that.logradouro) && Objects.equals(numero, that.numero) && Objects.equals(complemento, that.complemento) && Objects.equals(bairro, that.bairro) && Objects.equals(uf, that.uf) && Objects.equals(cep, that.cep) && Objects.equals(email, that.email) && Objects.equals(senha, that.senha) && Objects.equals(cargo, that.cargo) && Objects.equals(dataEntrada, that.dataEntrada) && Objects.equals(dataSaida, that.dataSaida) && Objects.equals(cidade, that.cidade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, cpf, salarioBruto, logradouro, numero, complemento, bairro, uf, cep, email, senha, cargo, dataEntrada, dataSaida, cidade);
+    }
 }
