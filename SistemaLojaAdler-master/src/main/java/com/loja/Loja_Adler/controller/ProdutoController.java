@@ -1,7 +1,9 @@
 package com.loja.Loja_Adler.controller;
 
 import com.loja.Loja_Adler.constants.ConstantsImagens;
+import com.loja.Loja_Adler.model.Categoria;
 import com.loja.Loja_Adler.model.Imagem;
+import com.loja.Loja_Adler.model.Marca;
 import com.loja.Loja_Adler.model.Produto;
 import com.loja.Loja_Adler.repository.CategoriaRepository;
 import com.loja.Loja_Adler.repository.ImagemRepository;
@@ -14,20 +16,18 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/administrativo/produtos")
 public class ProdutoController {
-
-    ConstantsImagens constantsImagens;
 
     @Autowired
     private ImagemRepository imagemRepository;
@@ -47,22 +47,6 @@ public class ProdutoController {
         mv.addObject("produto", produto);
         mv.addObject("listaMarcas", marcaRepository.findAll());
         mv.addObject("listaCategorias", categoriaRepository.findAll());
-        return mv;
-    }
-
-    @GetMapping("/listar")
-    public ModelAndView listar() {
-        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
-        List<Imagem> listaDeImagens = imagemRepository.findAll();
-        List<Produto> listaDeProdutos = produtoRepository.findAll();
-        for (Imagem imagem : listaDeImagens) {
-            for(Produto prod: listaDeProdutos){
-                if(imagem.getProduto().equals(prod)){
-                    prod.setNomeImagem(imagem.getNome());
-                }
-            }
-        }
-        mv.addObject("listaProdutos", listaDeProdutos);
         return mv;
     }
 
@@ -96,20 +80,16 @@ public class ProdutoController {
 
     @PostMapping("/salvar")
     public ModelAndView salvar(@Validated Produto produto, BindingResult result, @RequestParam("file") List<MultipartFile> arquivo) {
-
         if (result.hasErrors()) {
             return cadastrar(produto);
         }
         produtoRepository.saveAndFlush(produto);
         try {
-
             if (!arquivo.isEmpty()) {
                 Imagem imagem = new Imagem();
-                //Salvou Produto
                 produtoRepository.saveAndFlush(produto);
                 for (MultipartFile file : arquivo) {
                     byte[] bytes = file.getBytes();
-                    // Caminho onde a imagem vai ser salva
                     Path caminho = Paths.get(ConstantsImagens.CAMINHO_PASTA_IMAGENS + String.valueOf(produto.getId()) + file.getOriginalFilename());
                     Files.write(caminho, bytes);
                     imagem.setNome(String.valueOf(produto.getId() + file.getOriginalFilename()));
@@ -120,8 +100,63 @@ public class ProdutoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return cadastrar(new Produto());
     }
+
+    @GetMapping("/listar")
+    public ModelAndView listar() {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
+        List<Produto> produtos = produtoRepository.findAll();
+        listarImagensProdutos(produtos);
+        mv.addObject("listaProdutos", produtos);
+        return mv;
+    }
+
+    @GetMapping("/listar/descricao")
+    public ModelAndView listarPorDescricao(String descricao) {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
+        List<Produto> produtos = produtoRepository.findByDescricao(descricao);
+        listarImagensProdutos(produtos);
+        mv.addObject("listaProdutos", produtos);
+        return mv;
+    }
+
+    @GetMapping("/listar/categoria")
+    public ModelAndView listarPorCategoria(String nome) {
+        List<Categoria> listCategoria =  categoriaRepository.findByNome(nome);
+        List<Produto> listProduto = new ArrayList<>();
+        for(Categoria categoria : listCategoria){
+            listProduto = produtoRepository.findByCategoria(categoria);
+        }
+        listarImagensProdutos(listProduto);
+        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
+        mv.addObject("listaProdutos",  listProduto);
+        return mv;
+    }
+
+    @GetMapping("/listar/marca")
+    public ModelAndView listarPorMarca(String nome) {
+        List<Produto> listProduto = new ArrayList<>();
+        List<Marca> listMarca = marcaRepository.findByNome(nome);
+        for(Marca marca : listMarca){
+            listProduto = produtoRepository.findByMarca(marca);
+        }
+        listarImagensProdutos(listProduto);
+        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
+        mv.addObject("listaProdutos", listProduto);
+        return mv;
+    }
+
+    public List<Produto> listarImagensProdutos(List<Produto> listaProdutos){
+        List<Imagem> imagens = imagemRepository.findAll();
+        for (Imagem img : imagens) {
+            for(Produto prod: listaProdutos){
+                if(img.getProduto().equals(prod)){
+                    prod.setNomeImagem(img.getNome());
+                }
+            }
+        }
+        return listaProdutos;
+    }
+
 }
