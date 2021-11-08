@@ -2,6 +2,7 @@ package com.loja.Loja_Adler.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,15 +19,22 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-
     private String descricao;
 
     private Double valorVenda;
 
     private Double quantidadeEstoque = 0.0;
 
+    @Transient
     private String nomeImagem;
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
 
     @ManyToOne
     private Marca marca;
@@ -40,14 +48,6 @@ public class Produto implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -74,13 +74,6 @@ public class Produto implements Serializable {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public String getNomeImagem() {
-        return nomeImagem;
-    }
-
-    public void setNomeImagem(String nomeImagem) {
-        this.nomeImagem = nomeImagem;
-    }
 
     public Marca getMarca() {
         return marca;
@@ -99,29 +92,27 @@ public class Produto implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", valorVenda=" + valorVenda +
+                ", quantidadeEstoque=" + quantidadeEstoque +
+                ", marca=" + marca +
+                ", categoria=" + categoria +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id) && Objects.equals(nome, produto.nome) && Objects.equals(descricao, produto.descricao) && Objects.equals(valorVenda, produto.valorVenda) && Objects.equals(quantidadeEstoque, produto.quantidadeEstoque) && Objects.equals(nomeImagem, produto.nomeImagem) && Objects.equals(marca, produto.marca) && Objects.equals(categoria, produto.categoria);
+        return Objects.equals(id, produto.id) && Objects.equals(descricao, produto.descricao) && Objects.equals(valorVenda, produto.valorVenda) && Objects.equals(quantidadeEstoque, produto.quantidadeEstoque) &&  Objects.equals(marca, produto.marca) && Objects.equals(categoria, produto.categoria);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, descricao, valorVenda, quantidadeEstoque, nomeImagem, marca, categoria);
-    }
-
-    @Override
-    public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", valorVenda=" + valorVenda +
-                ", quantidadeEstoque=" + quantidadeEstoque +
-                ", nomeImagem='" + nomeImagem + '\'' +
-                ", marca=" + marca +
-                ", categoria=" + categoria +
-                '}';
+        return Objects.hash(id, descricao, valorVenda, quantidadeEstoque, marca, categoria);
     }
 }

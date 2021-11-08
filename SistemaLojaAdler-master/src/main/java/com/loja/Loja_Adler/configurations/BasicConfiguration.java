@@ -25,7 +25,6 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // método para que seja possível tratar os usuários
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
                         "select email as username, senha as password, 1 as enable from funcionario where email=?")

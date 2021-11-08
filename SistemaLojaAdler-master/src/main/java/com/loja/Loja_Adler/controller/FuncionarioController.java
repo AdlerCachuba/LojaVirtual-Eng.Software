@@ -57,22 +57,14 @@ public class FuncionarioController {
     }
 
     @PostMapping("/salvar")
-    public ModelAndView salvar(@Validated Funcionario funcionario, BindingResult result, Model model) {
+    public ModelAndView salvar(@Validated Funcionario funcionario, BindingResult result) {
+        if (result.hasErrors()) {
+            return cadastrar(funcionario);
+        }
+        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
 
-//        if (ValidarCpf.isCPF(funcionario.getCpf())) {
-            if (result.hasErrors()) {
-                return cadastrar(funcionario);
-            }
-
-            // criptar senha
-            funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
-
-            funcionarioRepositorio.saveAndFlush(funcionario);
-            return cadastrar(new Funcionario());
-//        }
-
-//        model.addAttribute("cpfValido", "inválido");
-
+        funcionarioRepositorio.saveAndFlush(funcionario);
+        return cadastrar(new Funcionario());
     }
 
 }
