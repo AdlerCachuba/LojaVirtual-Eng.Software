@@ -3,6 +3,7 @@ package com.loja.Loja_Adler.controller;
 import com.loja.Loja_Adler.model.Funcionario;
 import com.loja.Loja_Adler.repository.FuncionarioRepository;
 import com.loja.Loja_Adler.service.EnviarEmailService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Date;
 
 @Controller

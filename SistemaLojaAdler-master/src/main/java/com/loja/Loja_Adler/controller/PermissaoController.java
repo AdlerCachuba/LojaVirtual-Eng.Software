@@ -1,7 +1,9 @@
 package com.loja.Loja_Adler.controller;
 
 import com.loja.Loja_Adler.model.Permissao;
-import com.loja.Loja_Adler.repository.*;
+import com.loja.Loja_Adler.repository.FuncionarioRepository;
+import com.loja.Loja_Adler.repository.PapelRepository;
+import com.loja.Loja_Adler.repository.PermissaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

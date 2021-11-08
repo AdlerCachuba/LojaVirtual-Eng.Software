@@ -16,7 +16,7 @@ public class EmailController {
     @GetMapping("/enviar-email")
     public String enviarEmail() {
         return enviarEmailService.enviar(
-                "isac.bandeir4@gmail.com",
+                "adlermateuself@gmail.com",
                 "Recuperação de Senha",
                 "Sua senha é 123");
     }

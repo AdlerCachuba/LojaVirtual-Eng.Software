@@ -1,7 +1,5 @@
 package com.loja.Loja_Adler.model;
 
-import com.loja.Loja_Adler.model.Produto;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;

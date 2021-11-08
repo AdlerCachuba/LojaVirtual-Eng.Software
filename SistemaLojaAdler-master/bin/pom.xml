@@ -13,7 +13,7 @@
 	<artifactId>Loja_Franciel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Loja_Franciel</name>
-	<description>Projeto de criação de uma loja virtual. Tendo como professor o Frank do IFPR - Campus Paranavaí</description>
+	<description>Projeto de criação de uma loja virtual.</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
