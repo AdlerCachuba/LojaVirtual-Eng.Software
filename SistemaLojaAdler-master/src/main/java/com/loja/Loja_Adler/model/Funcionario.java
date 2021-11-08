@@ -41,6 +41,11 @@ public class Funcionario implements Serializable {
 
     private String senha;
 
+    private String codigoRecuperacao;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCodigo;
+
 	private String cargo;
 
 	@Temporal(TemporalType.DATE)
@@ -180,6 +185,35 @@ public class Funcionario implements Serializable {
         this.cidade = cidade;
     }
 
+    public String getCodigoRecuperacao() {
+        return codigoRecuperacao;
+    }
+
+    public void setCodigoRecuperacao(String codigoRecuperacao) {
+        this.codigoRecuperacao = codigoRecuperacao;
+    }
+
+    public Date getDataCodigo() {
+        return dataCodigo;
+    }
+
+    public void setDataCodigo(Date dataCodigo) {
+        this.dataCodigo = dataCodigo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Funcionario that = (Funcionario) o;
+        return Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(cpf, that.cpf) && Objects.equals(salarioBruto, that.salarioBruto) && Objects.equals(logradouro, that.logradouro) && Objects.equals(numero, that.numero) && Objects.equals(complemento, that.complemento) && Objects.equals(bairro, that.bairro) && Objects.equals(uf, that.uf) && Objects.equals(cep, that.cep) && Objects.equals(email, that.email) && Objects.equals(senha, that.senha) && Objects.equals(codigoRecuperacao, that.codigoRecuperacao) && Objects.equals(dataCodigo, that.dataCodigo) && Objects.equals(cargo, that.cargo) && Objects.equals(dataEntrada, that.dataEntrada) && Objects.equals(dataSaida, that.dataSaida) && Objects.equals(cidade, that.cidade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, cpf, salarioBruto, logradouro, numero, complemento, bairro, uf, cep, email, senha, codigoRecuperacao, dataCodigo, cargo, dataEntrada, dataSaida, cidade);
+    }
+
     @Override
     public String toString() {
         return "Funcionario{" +
@@ -195,6 +229,8 @@ public class Funcionario implements Serializable {
                 ", cep='" + cep + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", codigoRecuperacao='" + codigoRecuperacao + '\'' +
+                ", dataCodigo=" + dataCodigo +
                 ", cargo='" + cargo + '\'' +
                 ", dataEntrada=" + dataEntrada +
                 ", dataSaida=" + dataSaida +
@@ -202,16 +238,5 @@ public class Funcionario implements Serializable {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Funcionario that = (Funcionario) o;
-        return Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(cpf, that.cpf) && Objects.equals(salarioBruto, that.salarioBruto) && Objects.equals(logradouro, that.logradouro) && Objects.equals(numero, that.numero) && Objects.equals(complemento, that.complemento) && Objects.equals(bairro, that.bairro) && Objects.equals(uf, that.uf) && Objects.equals(cep, that.cep) && Objects.equals(email, that.email) && Objects.equals(senha, that.senha) && Objects.equals(cargo, that.cargo) && Objects.equals(dataEntrada, that.dataEntrada) && Objects.equals(dataSaida, that.dataSaida) && Objects.equals(cidade, that.cidade);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, cpf, salarioBruto, logradouro, numero, complemento, bairro, uf, cep, email, senha, cargo, dataEntrada, dataSaida, cidade);
-    }
+    
 }
