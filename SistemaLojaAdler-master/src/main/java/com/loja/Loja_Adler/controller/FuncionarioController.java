@@ -3,6 +3,7 @@ package com.loja.Loja_Adler.controller;
 import com.loja.Loja_Adler.model.Funcionario;
 import com.loja.Loja_Adler.repository.CidadeRepository;
 import com.loja.Loja_Adler.repository.FuncionarioRepository;
+import com.loja.Loja_Adler.service.EnviarEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class FuncionarioController {
 
     @Autowired
     private CidadeRepository cidadeRepository;
+
+    @Autowired
+    private EnviarEmailService enviarEmailService;
 
     @GetMapping("/cadastrar")
     public ModelAndView cadastrar(Funcionario funcionario) {
@@ -58,13 +62,13 @@ public class FuncionarioController {
 
     @PostMapping("/salvar")
     public ModelAndView salvar(@Validated Funcionario funcionario, BindingResult result) {
-        if (result.hasErrors()) {
-            return cadastrar(funcionario);
-        }
-        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
-
-        funcionarioRepositorio.saveAndFlush(funcionario);
-        return cadastrar(new Funcionario());
+            if (result.hasErrors()) {
+                return cadastrar(funcionario);
+            }
+            funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
+            funcionarioRepositorio.saveAndFlush(funcionario);
+            enviarEmailService.enviar(funcionario.getEmail(), "Dados Cadastrais", "A sua senha cadastrada foi "+funcionario.getSenha());
+            return cadastrar(new Funcionario());
     }
 
 }
