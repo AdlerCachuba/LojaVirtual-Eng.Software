@@ -1,8 +1,10 @@
 package com.loja.Loja_Adler.controller;
 
 import com.loja.Loja_Adler.constants.ConstantsImagens;
+import com.loja.Loja_Adler.model.Imagem;
 import com.loja.Loja_Adler.model.Produto;
 import com.loja.Loja_Adler.repository.CategoriaRepository;
+import com.loja.Loja_Adler.repository.ImagemRepository;
 import com.loja.Loja_Adler.repository.MarcaRepository;
 import com.loja.Loja_Adler.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,6 +28,9 @@ import java.util.Optional;
 public class ProdutoController {
 
     ConstantsImagens constantsImagens;
+
+    @Autowired
+    private ImagemRepository imagemRepository;
 
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -47,7 +53,16 @@ public class ProdutoController {
     @GetMapping("/listar")
     public ModelAndView listar() {
         ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
-        mv.addObject("listaProdutos", produtoRepository.findAll());
+        List<Imagem> listaDeImagens = imagemRepository.findAll();
+        List<Produto> listaDeProdutos = produtoRepository.findAll();
+        for (Imagem imagem : listaDeImagens) {
+            for(Produto prod: listaDeProdutos){
+                if(imagem.getProduto().equals(prod)){
+                    prod.setNomeImagem(imagem.getNome());
+                }
+            }
+        }
+        mv.addObject("listaProdutos", listaDeProdutos);
         return mv;
     }
 
@@ -68,7 +83,7 @@ public class ProdutoController {
     @GetMapping("/mostrarImagem/{imagem}")
     public byte[] retornarImagem(@PathVariable("imagem") String imagem) {
         if (imagem != null || imagem.trim().length() > 0) {
-            File imagemArquivo = new File(constantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
+            File imagemArquivo = new File(ConstantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
             try {
                 return Files.readAllBytes(imagemArquivo.toPath());
             } catch (IOException e) {
@@ -80,7 +95,7 @@ public class ProdutoController {
 
 
     @PostMapping("/salvar")
-    public ModelAndView salvar(@Validated Produto produto, BindingResult result, @RequestParam("file") MultipartFile arquivo) {
+    public ModelAndView salvar(@Validated Produto produto, BindingResult result, @RequestParam("file") List<MultipartFile> arquivo) {
 
         if (result.hasErrors()) {
             return cadastrar(produto);
@@ -89,18 +104,19 @@ public class ProdutoController {
         try {
 
             if (!arquivo.isEmpty()) {
-                byte[] bytes = arquivo.getBytes();
-
-                // Caminho onde a imagem vai ser salva
-                Path caminho = Paths.get(constantsImagens.CAMINHO_PASTA_IMAGENS + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
-                Files.write(caminho, bytes);
-
-                // Salva no banco de dados a imagem com tal nome
-                produto.setNomeImagem(String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
-
+                Imagem imagem = new Imagem();
+                //Salvou Produto
                 produtoRepository.saveAndFlush(produto);
+                for (MultipartFile file : arquivo) {
+                    byte[] bytes = file.getBytes();
+                    // Caminho onde a imagem vai ser salva
+                    Path caminho = Paths.get(ConstantsImagens.CAMINHO_PASTA_IMAGENS + String.valueOf(produto.getId()) + file.getOriginalFilename());
+                    Files.write(caminho, bytes);
+                    imagem.setNome(String.valueOf(produto.getId() + file.getOriginalFilename()));
+                    imagem.setProduto(produto);
+                    imagemRepository.saveAndFlush(imagem);
+                }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,5 +124,4 @@ public class ProdutoController {
 
         return cadastrar(new Produto());
     }
-
 }

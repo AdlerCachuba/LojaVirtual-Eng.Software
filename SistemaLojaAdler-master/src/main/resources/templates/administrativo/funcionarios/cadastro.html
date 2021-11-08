@@ -60,6 +60,19 @@
 							<option value="10">Coordenador de RH</option>
 							<option value="11">Psicologo</option>
 						</select>
+					<div class="invalid-feedback"></div>
+                </div>
+
+					<div class="form-group col-md-6">
+						<label for="logradouro">Logradouro</label>
+						<input type="text" class="form-control" id="logradouro" placeholder="logradouro sem numero" name="logradouro" value="" />
+						<div class="invalid-feedback"></div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="numero">Número</label>
+						<input type="text" class="form-control" id="numero" name="numero" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
 					<div class="form-group col-md-6">
@@ -86,6 +99,7 @@
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
+
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="numero">Número</label>
@@ -100,12 +114,14 @@
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
+
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="bairro">Bairro</label>
 						<input type="text" class="form-control"  id="bairro" name="bairro" th:field="*{bairro}" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
+
 					<div class="form-group col-md-6">
 						<label for="cep">Cep</label>
 						<input type="text" class="form-control" id="cep" placeholder="Apenas números" data-mask="00000-000" maxlength="9" name="cep" th:field="*{cep}" value="" />
@@ -122,7 +138,7 @@
 
 					<div class="form-group col-md-6">
 						<label for="senha">Senha</label>
-						<input type="text" class="form-control" id="senha" name="senha" th:field="*{senha}" value="" />
+						<input type="password" class="form-control" id="senha" name="senha" th:field="*{senha}" value="" />
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>

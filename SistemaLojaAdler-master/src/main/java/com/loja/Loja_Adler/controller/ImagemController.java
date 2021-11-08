@@ -13,12 +13,10 @@ import java.nio.file.Files;
 @Controller
 public class ImagemController {
 
-    ConstantsImagens constantsImagens;
-
     @GetMapping("/mostrarImagem/{imagem}")
     @ResponseBody
     public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
-        File imagemArquivo = new File(constantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
+        File imagemArquivo = new File(ConstantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
         if (imagem != null || imagem.trim().length() > 0) {
             try {
                 return Files.readAllBytes(imagemArquivo.toPath());
