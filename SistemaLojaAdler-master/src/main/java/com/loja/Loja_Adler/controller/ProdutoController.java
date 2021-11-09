@@ -87,9 +87,10 @@ public class ProdutoController {
         produtoRepository.saveAndFlush(produto);
         try {
             if (!arquivo.isEmpty()) {
-                Imagem imagem = new Imagem();
+
                 produtoRepository.saveAndFlush(produto);
                 for (MultipartFile file : arquivo) {
+                    Imagem imagem = new Imagem();
                     byte[] bytes = file.getBytes();
                     Path caminho = Paths.get(ConstantsImagens.CAMINHO_PASTA_IMAGENS + String.valueOf(produto.getId()) + file.getOriginalFilename());
                     Files.write(caminho, bytes);

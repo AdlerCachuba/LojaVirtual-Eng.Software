@@ -65,4 +65,6 @@ public class Imagem implements Serializable{
                 ", produto=" + produto +
                 '}';
     }
+
+
 }
