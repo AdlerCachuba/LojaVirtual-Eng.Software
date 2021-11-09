@@ -20,8 +20,6 @@ public class DataConfiguration {
 		dataSource.setUsername("root");
 		dataSource.setPassword("root");
 		return dataSource;
-		
-
 	}
 	
 	@Bean

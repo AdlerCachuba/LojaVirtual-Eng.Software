@@ -23,14 +23,14 @@ public class MarcaController {
 	
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrar(Marca marca) {
-		ModelAndView mv = new ModelAndView("administrativo/marca/cadastro");
+		ModelAndView mv = new ModelAndView("administrativo/marcas/cadastro");
 		mv.addObject("marca", marca);
 		return mv;
 	}
 	
 	@GetMapping("/listar")
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("/administrativo/marca/lista");
+		ModelAndView mv = new ModelAndView("/administrativo/marcas/lista");
 		mv.addObject("listaMarcas", marcaRepository.findAll());
 		return mv;
 	}
