@@ -60,6 +60,7 @@ public class ProdutoController {
     @GetMapping("/remover/{id}")
     public ModelAndView remover(@PathVariable("id") Long id) {
         Optional<Produto> produto = produtoRepository.findById(id);
+        imagemRepository.deleteAll(imagemRepository.findImagensProdutoByProduto(produto.get()));
         produtoRepository.delete(produto.get());
         return listar();
     }
@@ -87,7 +88,6 @@ public class ProdutoController {
         produtoRepository.saveAndFlush(produto);
         try {
             if (!arquivo.isEmpty()) {
-
                 produtoRepository.saveAndFlush(produto);
                 for (MultipartFile file : arquivo) {
                     Imagem imagem = new Imagem();
