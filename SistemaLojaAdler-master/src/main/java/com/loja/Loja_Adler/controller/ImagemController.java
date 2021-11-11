@@ -18,19 +18,20 @@ import java.util.List;
 @Controller
 public class ImagemController {
 
-//    @GetMapping("/mostrarImagem/{imagem}")
-//    @ResponseBody
-//    public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
-//        File imagemArquivo = new File(ConstantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
-//        if (imagem != null || imagem.trim().length() > 0) {
-//            try {
-//                return Files.readAllBytes(imagemArquivo.toPath());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
+    @GetMapping("/mostrarImagem/{imagem}")
+    @ResponseBody
+    public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
+        File imagemArquivo = new File(ConstantsImagens.CAMINHO_PASTA_IMAGENS + imagem);
+        if (imagem != null || imagem.trim().length() > 0) {
+            try {
+                return Files.readAllBytes(imagemArquivo.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 @Autowired
 ImagemRepository imagemRepository;
 
