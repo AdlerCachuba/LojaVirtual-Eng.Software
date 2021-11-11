@@ -161,4 +161,32 @@ public class ProdutoController {
         return listaProdutos;
     }
 
+    // lote de produtos inserir
+//    @GetMapping("/administrativo/produtos/lote_insercao")
+//    public ModelAndView cargoInsert() {
+//        var marcaEscolhida = marcaRepository.findById(1L).get();
+//        var categoriaEscolhida = categoriaRepository.findById(1L).get();
+//        double tamanhoDoArrayInicial = 25000.0;
+//        int total = tamanhoDoArrayInicial;
+//        ArrayList<Produto> listaDeProdutos = new ArrayList();
+//        while (tamanhoDoArrayInicial != 400000) {
+//            total += tamanhoDoArrayInicial;
+//            for (int j = 0; j < tamanhoDoArrayInicial; j++) {
+//                var produto = new Produto();
+//                        produto.setDescricao("Product_" + j);
+//                        produto.setValorVenda(12.0);
+//                        produto.setQuantidadeEstoque(1.0);
+//                        produto.setNomeImagem("1231312313123.jpg");
+//                        produto.setCategoria(categoriaEscolhida);
+//                        produto.setMarca(marcaEscolhida);
+//                listaDeProdutos.add(produto);
+//            }
+//
+//            produtoRepository.saveAll(listaDeProdutos);
+//            listaDeProdutos = new ArrayList<Produto>();
+//            tamanhoDoArrayInicial = tamanhoDoArrayInicial * 2;
+//        }
+//        return null;
+//    }
+
 }
