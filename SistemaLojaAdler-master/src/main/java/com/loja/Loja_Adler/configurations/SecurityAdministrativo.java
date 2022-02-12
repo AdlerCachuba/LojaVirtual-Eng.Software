@@ -19,29 +19,7 @@ public class SecurityAdministrativo extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery(
-//                        "select email as username, senha as password, 1 as enable from funcionario where email=?")
-//                .authoritiesByUsernameQuery(
-//                        "select funcionario.email as username, papel.nome as authority from permissoes inner join funcionario on funcionario.id=permissoes.funcionario_id inner join papel on permissoes.papel_id=papel.id where funcionario.email=?")
-//                .passwordEncoder(new BCryptPasswordEncoder());
-//
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable().authorizeRequests()
-//                .antMatchers("/administrativo/entrada/**").hasAuthority("Gerente")
-//                .antMatchers("/administrativo/**").hasAnyAuthority("Gerente", "Vendedor")
-//                .and().formLogin()
-//                .loginPage("/login").permitAll().and().logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/administrativo").and()
-//                .exceptionHandling().accessDeniedPage("/negado");
-//
-//    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // método para que seja possível tratar os usuários
@@ -58,7 +36,7 @@ public class SecurityAdministrativo extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/login").permitAll()
                 .antMatchers("/administrativo/cadastrar/**")
-                .hasAnyAuthority("Gerente").antMatchers("/administrativo/**").authenticated().and().formLogin()
+                .hasAnyAuthority("gerente").antMatchers("/administrativo/**").authenticated().and().formLogin()
                 .loginPage("/login").failureUrl("/login").loginProcessingUrl("/admin")
                 .defaultSuccessUrl("/administrativo").usernameParameter("username").passwordParameter("password").and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/administrativo/logout"))

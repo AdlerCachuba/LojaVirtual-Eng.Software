@@ -29,7 +29,7 @@ public class ClienteController {
 
     @GetMapping("/cadastrar")
     public ModelAndView cadastrar(Cliente cliente) {
-        ModelAndView mv =  new ModelAndView("administrativo/cliente/cadastrar");
+        ModelAndView mv =  new ModelAndView("cliente/cadastrar");
         mv.addObject("cliente",cliente);
         mv.addObject("listaCidades",cidadeRepositorio.findAll());
         return mv;
@@ -37,7 +37,7 @@ public class ClienteController {
 
     @GetMapping("/login")
     public ModelAndView login(Cliente cliente) {
-        ModelAndView mv =  new ModelAndView("administrativo/cliente/login");
+        ModelAndView mv =  new ModelAndView("cliente/login");
         mv.addObject("cliente",cliente);
         mv.addObject("listaCidades",cidadeRepositorio.findAll());
         return mv;
