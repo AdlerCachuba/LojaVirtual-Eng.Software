@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-class CarrinhoControle {
+public class CarrinhoController {
 
     private List<ItensCompra> itensCompra = new ArrayList<ItensCompra>();
     private Compra compra = new Compra();
