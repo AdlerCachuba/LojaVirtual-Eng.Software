@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{administrativo/fragments/layout}">
 
 <head>
 	<title>Loja Virtual com Spring MVC Spring Boot</title>
@@ -19,130 +22,207 @@
 </head>
 
 <body>
-	<header>
-		<nav class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="btn btn-dark navbar-toggle pull-left">
-						<i class="oi oi-menu"></i>
-					</button>
-					<a class="navbar-brand " href="#">Painel Administrativo da Loja Virtual</a>
-				</div>
+<header>
+	<nav class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="btn btn-dark navbar-toggle pull-left">
+					<i class="oi oi-menu"></i>
+				</button>
+				<a class="navbar-brand " href="#">Painel Administrativo da Loja Virtual</a>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<div class="layout-main">
+
+
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span>Home</span>
+					</li>
+				</ul>
 			</div>
 		</nav>
-	</header>
 
-	<div class="layout-main">
+		<div class="container">
+			<div class="bd-example">
+				<div id="carouselExampleCaptions" class="carousel slide" data-interval="3000" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+						<li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
+						<li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
+					</ol>
 
-
-		<section class="layout-content" layout:fragment="corpo">
-
-			<nav class="navbar navbar-expand-md bg-light">
-				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<i class="oi oi-caret-right"></i>
-							<span>Home</span>
-						</li>
-					</ul>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img class="d-block w-100"
+								 src="https://programathor.com.br/blog/wp-content/uploads/2019/02/Desenvolvedor-web-3-676x366.png"
+								 alt="First slide">
+							<div class="carousel-caption d-none d-md-block">
+								<h5>Atividade IFPR</h5>
+								<p>Desenvolvimento WEB</p>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100"
+								 data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide"
+								 alt="Second slide [800x400]"
+								 src="https://imgs.developpaper.com/imgs/4022299690-5cbfee9664b63_articlex.png"
+								 data-holder-rendered="true">
+							<div class="carousel-caption d-none d-md-block">
+								<h5>Implementação de um Carrosel'</h5>
+								<p>Ultilizando Biblioteca BootStrap 4</p>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100"
+								 data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide"
+								 alt="Third slide [800x400]"
+								 src="https://i0.wp.com/anmtv.com.br/wp-content/uploads/deadpool-marvel.jpg?ssl=1"
+								 data-holder-rendered="true">
+							<div class="carousel-caption d-none d-md-block">
+								<h5>Uma Nova Aprendizagem muito legal!!!</h5>
+								<p>Simples de aplicar e intuitivo</p>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
+					   data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleCaptions" role="button"
+					   data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
 				</div>
-			</nav>
+			</div>
 
+			<!-- Cards Metricos	-->
+			<div class="d-sm-flex align-items-center justify-content-between m-4">
+				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+				<div>
+					<a href="/relatorio/funcionarios" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relátorio de Funcionarios</a>
+					<a href="/relatorio/produtos" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relátorio dos Produtos</a>
+				</div>
+			</div>
 
+			<div class="row">
 
-
-			<div class="container">
-				<div class="bd-example">
-					<div id="carouselExampleCaptions" class="carousel slide" data-interval="3000" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-							<li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
-							<li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
-						</ol>
-
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block w-100"
-									src="https://programathor.com.br/blog/wp-content/uploads/2019/02/Desenvolvedor-web-3-676x366.png"
-									alt="First slide">
-								<div class="carousel-caption d-none d-md-block">
-									<h5>Atividade IFPR</h5>
-									<p>Desenvolvimento WEB</p>
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-primary shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+										Total Ganho com as Compras </div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">R$
+										<span  th:text="${totalCompraVendidas}"></span></div>
 								</div>
-							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100"
-									data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide"
-									alt="Second slide [800x400]"
-									src="https://imgs.developpaper.com/imgs/4022299690-5cbfee9664b63_articlex.png"
-									data-holder-rendered="true">
-								<div class="carousel-caption d-none d-md-block">
-									<h5>Implementação de um Carrosel'</h5>
-									<p>Ultilizando Biblioteca BootStrap 4</p>
-								</div>
-							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100"
-									data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide"
-									alt="Third slide [800x400]"
-									src="https://i0.wp.com/anmtv.com.br/wp-content/uploads/deadpool-marvel.jpg?ssl=1"
-									data-holder-rendered="true">
-								<div class="carousel-caption d-none d-md-block">
-									<h5>Uma Nova Aprendizagem muito legal!!!</h5>
-									<p>Simples de aplicar e intuitivo</p>
+								<div class="col-auto">
+									<i class="fas fa-calendar fa-2x text-gray-300"></i>
 								</div>
 							</div>
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
-							data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#carouselExampleCaptions" role="button"
-							data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
 					</div>
 				</div>
 
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-success shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+										Total de funcionários</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800"><span  th:text="${totalFuncionarios}"></span> </div>
+								</div>
+								<div class="col-auto">
+									<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-info shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Margem de Lucro
+									</div>
+									<div class="row no-gutters align-items-center">
+										<div class="col-auto">
+											<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span  th:text="${margemDeLucros}"></span> %</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-auto">
+									<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-3 col-md-6 mb-4">
+					<div class="card border-left-warning shadow h-100 py-2">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+										Produtos em Estoque</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800"><span th:text="${totalProdutosEstoque}"></span></div>
+								</div>
+								<div class="col-auto">
+									<i class="fas fa-comments fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 
-
-
-
-
-		</section>
-
-	</div>
-	<footer class="layout-footer">
-		<div class="container">
-			<span class="footer-copy">&copy; 2018 MBallem. Todos os direitos reservados.</span>
 		</div>
-	</footer>
+	</section>
 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="/webjars/jquery/jquery.min.js"></script>
-	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
+</div>
+<footer class="layout-footer">
+	<div class="container">
+		<span class="footer-copy">&copy; 2018 MBallem. Todos os direitos reservados.</span>
+	</div>
+</footer>
 
-		$(function () {
-			$('[data-toggle="popover"]').popover();
-		});
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
 
-		$(document).ready(function () {
-			$(".navbar-toggle").click(function () {
-				$(".sidebar").toggleClass("sidebar-open");
-			})
-		});
+	$(function () {
+		$('[data-toggle="popover"]').popover();
+	});
 
-	</script>
+	$(document).ready(function () {
+		$(".navbar-toggle").click(function () {
+			$(".sidebar").toggleClass("sidebar-open");
+		})
+	});
+
+</script>
 </body>
 
 </html>

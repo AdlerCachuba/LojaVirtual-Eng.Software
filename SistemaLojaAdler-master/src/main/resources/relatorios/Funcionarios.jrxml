@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Funcionarios" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27d066cd-0e1f-4877-b5d0-25bd1f40996a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="loja"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="319"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="670"/>
+	<subDataset name="Loja" uuid="a487553c-a193-438f-8939-e58ceacf409f">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="loja"/>
+		<queryString language="SQL">
+			<![CDATA[select f.id, f.nome, f.email, f.cpf, f.data_entrada, f.cep, f.salario_bruto from funcionario f]]>
+		</queryString>
+		<field name="id" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="id"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+		<field name="nome" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="nome"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+		<field name="email" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="email"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+		<field name="cpf" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+		<field name="data_entrada" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="data_entrada"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+		<field name="cep" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="cep"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+		<field name="salario_bruto" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="salario_bruto"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[select f.id, f.nome, f.email, f.cpf, f.data_entrada, f.cep, f.salario_bruto from funcionario f]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="data_entrada" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_entrada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cep"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<field name="salario_bruto" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="salario_bruto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionario"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="c0c1da73-814e-4e54-9a73-c25d3c3f8489"/>
+				<staticText>
+					<reportElement x="20" y="20" width="330" height="43" forecolor="#FFFFFF" uuid="723e43c1-80c4-443b-9305-01d3489d3caf"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Loja AdyClock]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="60" width="260" height="32" forecolor="#FFFFFF" uuid="4154c10a-4006-4eee-8211-c3fe57c294ec">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Trazendo as maiores variedades de smartwacthes com um preço justo.]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="50">
+			<property name="com.jaspersoft.studio.layout"/>
+			<textField>
+				<reportElement x="0" y="20" width="40" height="20" uuid="59b259bb-2959-4be3-b1a9-fc98784b46c7"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="20" backcolor="#AFCEE3" uuid="c61905b4-477a-4731-bb19-3539ebc0c969"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="100" height="20" backcolor="#AFCEE3" uuid="c869daf2-4972-4959-b0f5-e14cc05f0a6a"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="100" height="20" backcolor="#AFCEE3" uuid="c29ef846-8011-40a4-9cff-bc94887a9c1d"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="100" height="20" backcolor="#AFCEE3" uuid="3e6dac98-5a01-49cf-a425-31ac9f1a1c2d"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="70" height="20" backcolor="#AFCEE3" uuid="428f9015-5687-4c62-82ea-77203a5cc441"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA ENTRADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="70" height="20" backcolor="#AFCEE3" uuid="577067b3-0975-4552-82cc-3f4aa92cc18f"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="70" height="20" backcolor="#AFCEE3" uuid="56292843-b9f6-43f1-b12e-d14229a33d11"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salário]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="40" y="20" width="100" height="20" uuid="56db8e4f-c935-4cfa-99d3-a6d942ebd2e5"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="20" width="100" height="20" uuid="57c5c4ac-2e87-4a5d-b9bd-79084305143b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="20" width="100" height="20" uuid="a83d5044-3162-49ba-bf5d-a0010f54cea2"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="20" width="70" height="20" uuid="d86721cd-b15b-4780-a9ea-5768cc9c0dc6"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{data_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="20" width="70" height="20" uuid="a06b3541-8bc0-469f-b721-f537aabc295c"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="20" width="70" height="20" uuid="482957c8-9738-427f-8e57-c9f0cc3713af"/>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{salario_bruto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20"/>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="950372b0-20b6-4654-89db-efdede55c9a0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="950a5826-d889-42d2-afa7-17379a080b70"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="2da1a223-3e24-4ead-ae49-a1bdf4f25c1f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
